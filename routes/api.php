@@ -13,7 +13,17 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+use App\Http\Controllers\LeaveRequestController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\UserController;
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/leave-requests', [LeaveRequestController::class, 'store']);
+});
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('/register', [RegisteredUserController::class, 'store']);
+
+Route::middleware('auth:sanctum')->get('/users', [UserController::class, 'index']);
