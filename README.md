@@ -33,6 +33,47 @@ A backend dashboard-style API application for managing employee leave requests. 
 ## 🛠️ Setup Instructions
 
 1. **Clone the project**
-```bash
-git clone https://github.com/your-username/leave-management.git
-cd leave-management
+    ```bash
+    git clone https://github.com/your-username/leave-management.git
+    cd leave-management
+    ```
+
+2. **Install dependencies**
+    ```bash
+    composer install
+    ```
+
+3. **Configure environment**
+    ```bash
+    cp .env.example .env
+    php artisan key:generate
+    ```
+
+    Update your `.env` file with the correct database credentials:
+    ```ini
+    DB_DATABASE=your_database_name
+    DB_USERNAME=your_db_user
+    DB_PASSWORD=your_db_password
+    ```
+
+4. **Run database migrations and seeders**
+    ```bash
+    php artisan migrate --seed
+    ```
+
+5. **Serve the application**
+    ```bash
+    php artisan serve
+    ```
+
+---
+
+## 🔐 API Authentication
+
+Laravel Sanctum is used for token-based authentication. After registering or logging in, you'll receive an API token. Use this token as a **Bearer token** in your request headers:
+
+```makefile
+Authorization: Bearer your_token_here
+
+
+
