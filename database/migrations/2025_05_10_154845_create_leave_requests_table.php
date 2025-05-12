@@ -18,8 +18,8 @@ class CreateLeaveRequestsTable extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->date('start_date');
             $table->date('end_date');
-            $table->string('reason');
-            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
+            $table->text('reason');
+            $table->enum('status', ['Pending', 'Approved', 'Rejected'])->default('Pending');
             $table->timestamps();
         });
     }
