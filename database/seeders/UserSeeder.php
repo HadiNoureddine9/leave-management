@@ -1,30 +1,32 @@
 <?php
-
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
     public function run()
     {
-        $admin = User::create([
-            'name' => 'Admin User',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('password'),
-        ]);
+        // Check if the admin already exists, if not create it
+        if (!User::where('email', 'admin@example.com')->exists()) {
+            $admin = User::create([
+                'name' => 'Admin User',
+                'email' => 'admin@example.com',
+                'password' => bcrypt('password'),
+            ]);
+            $admin->assignRole('admin');
+        }
 
-        $admin->assignRole('admin');
-
-        $employee = User::create([
-            'name' => 'Employee User',
-            'email' => 'employee@example.com',
-            'password' => Hash::make('password'),
-        ]);
-
-        $employee->assignRole('employee');
+        // Check if the employee already exists, if not create it
+        if (!User::where('email', 'employee@example.com')->exists()) {
+            $employee = User::create([
+                'name' => 'Employee User',
+                'email' => 'employee@example.com',
+                'password' => bcrypt('password'),
+            ]);
+            $employee->assignRole('employee');
+        }
     }
 }
-
