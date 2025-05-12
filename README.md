@@ -68,12 +68,25 @@ A backend dashboard-style API application for managing employee leave requests. 
 
 ---
 
-## 🔐 API Authentication
+## 🔐 API Authentication & Design Decisions
+
 
 Laravel Sanctum is used for token-based authentication. After registering or logging in, you'll receive an API token. Use this token as a **Bearer token** in your request headers:
 
 ```makefile
 Authorization: Bearer your_token_here
+
+
+
+Only two user roles: Admin and Employee.
+
+Employees can only manage their own leave requests.
+
+Admins can view and manage all leave requests.
+
+Laravel Sanctum is used for simple API token handling.
+
+Departments can be added later for scalability.
 
 
 
